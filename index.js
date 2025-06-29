@@ -5,6 +5,8 @@ const cookieParser = require("cookie-parser");
 const connectDB = require("./db");
 const app = express();
 const port = process.env.PORT || 3003;
+const courseRoutes = require("./routes/course.routes");
+const errorHandler = require("./utils/errorHandler");
 
 app.use(cors({ origin: process.env.FRONTEND_URI, credentials: true }));
 
@@ -16,6 +18,10 @@ app.use(cookieParser());
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
+
+app.use("/api/v1/courses", courseRoutes);
+
+app.use(errorHandler);
 
 connectDB()
   .then(() => {
