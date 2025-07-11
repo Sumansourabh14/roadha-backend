@@ -6,6 +6,7 @@ const connectDB = require("./db");
 const app = express();
 const port = process.env.PORT || 3003;
 const courseRoutes = require("./routes/course.routes");
+const uploadRoutes = require("./routes/upload.routes");
 const errorHandler = require("./utils/errorHandler");
 
 app.use(cors({ origin: process.env.FRONTEND_URI, credentials: true }));
@@ -20,6 +21,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/v1/courses", courseRoutes);
+app.use("/api/v1/upload", uploadRoutes);
 
 app.use(errorHandler);
 
